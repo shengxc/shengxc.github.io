@@ -6,6 +6,6 @@ category:
 tags: [面试]
 ---
 
-$ q \in R $
+a_1 
 
 {% include JB/setup %}
