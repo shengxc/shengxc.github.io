@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "自然数和数论"
-description: "读《什么是数学》一书的一些记录"
+description: "《什么是数学》读书笔记"
 category:
 tags: [读书笔记]
 ---
