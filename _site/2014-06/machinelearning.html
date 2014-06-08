@@ -1,0 +1,359 @@
+
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8">
+    <title>局部加权回归和logistic回归 - shengxc's blog</title>
+    <meta name="description" content="斯坦福大学机器学习公开课笔记">
+    <meta name="keywords" content="">
+    <meta name="author" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- HTML5 shim, for IE6-8 support of HTML elements -->
+
+    <link href="http://cdn.bootcss.com/twitter-bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet" media="all">
+    <link href="http://cdn.bootcss.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet" media="all">
+    <link href="/assets/themes/havee/css/style.css?body=1" rel="stylesheet" media="all">
+    <link href="/assets/themes/havee/css/pygments.css" rel="stylesheet" media="all">
+    <link href="http://cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet" media="all">
+    <link href="/assets/themes/havee/css/" rel="stylesheet" media="all">
+
+    <link rel="shortcut icon" href="/favicon.png">
+    <link rel="canonical" href="/2014-06/machinelearning.html">
+    <!-- fav and touch icons -->
+    <!-- Update these with your own images
+    <link rel="shortcut icon" href="images/favicon.png">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+    -->
+
+    <!-- atom & rss feed -->
+    <link href="/atom.xml" type="application/atom+xml" rel="alternate" title="shengxc's blog ATOM Feed">
+    <link href="/rss.xml" type="application/rss+xml" rel="alternate" title="shengxc's blog RSS Feed">
+
+  </head>
+
+  <body>
+    <!--[if lte IE 9]>
+    <div class="alert alert-warning">
+      <p>Your Internet Explorer is not supported. Please upgrade your Internet Explorer to version 9+, or use latest <a href="http://www.google.com/chrome/" target="_blank" class="alert-link">Google chrome</a>、<a href="http://www.mozilla.org/firefox/" target="_blank" class="alert-link">Mozilla Firefox</a>.</p>
+      <p>If you are using IE 9 or later, make sure you <a href="http://windows.microsoft.com/en-us/internet-explorer/use-compatibility-view#ie=ie-8" target="_blank" class="alert-link">turn off "Compatibility view"</a>.</p>
+    </div>
+    <![endif]-->
+
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/" title="shengxc's blog">shengxc's blog</a>
+      </div>
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse navbar-ex1-collapse">
+        <ul class="nav navbar-nav">
+          
+          
+          
+
+
+  
+    
+  
+    
+      
+      	
+      	<li><a href="/archive.html">Archive</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/categories.html">Categories</a></li>
+      	
+      
+    
+  
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/tags.html">Tags</a></li>
+      	
+      
+    
+  
+    
+  
+
+
+
+
+          <li>
+          <form id="search-form" class="form-inline visible-lg" role="form">
+            <input type="text" class="form-control input-sm" placeholder="Search" id="query">
+          </form>
+          </li>
+        </ul>
+
+        <ul class="nav navbar-nav navbar-right visible-lg visible-md">
+          <li><a href="/rss.xml" target="_blank" title="RSS"><span class="fa fa-rss fa-lg"></span></a></li>
+          
+          
+          
+          
+          
+        </ul>
+      </div><!-- /.navbar-collapse -->
+    </div>
+    </nav>
+
+    <div class="container">
+      <div class="content">
+        
+<div class="row">
+
+  <article class="col-md-9 main-contenter">
+    <div id="search-loader" style="display:none;text-align:center">
+      <img src="/assets/themes/havee/images/loading.gif">
+    </div>
+    <div class="page-header">
+      <h2>
+        局部加权回归和logistic回归
+        
+      </h2>
+	  <div class="bottom">
+		<span class="glyphicon glyphicon-user"></span><p></p>
+	    <span class="glyphicon glyphicon-calendar"></span><p>05 Jun 2014</p>
+		<span class="glyphicon glyphicon-folder-open"></span> 
+		<span class="glyphicon glyphicon-tags"></span> <a href="/tags.html#机器学习-ref" title="机器学习"><p>机器学习</p></a>
+      </div>
+    </div>
+    <div class="wrapper"><h1 id="underfittingoverfitting">欠拟合（underfitting）和过拟合（overfitting）</h1>
+<p>假设下图中的离散点为某地区房子大小（横轴）与房子价格（纵轴）之间的关系。
+<img src="/resource/2014-06-05-machinelearning/curvefit.png" alt="拟合" />
+左图中的直线是对数据进行线性回归的结果，中间的图是把直线换成二次曲线所得的结果，而右边的是用5次曲线来拟合得到的完美通过每个坐标点的曲线（由于一共只有6个数据点，因此，5次曲线能够完美通过所有数据点）。左图拟合结果（欠拟合）中的直线无法很好的拟合给定的数据，数据中暗含的某些二次特征，而右图结果（过拟合）仅仅反映了数据本身的特性，而不是隐藏在数据之下的一般变化规律。中间图的拟合结果应该算是这三个中最好的一个。</p>
+
+<h1 id="section">参数学习和非参数学习</h1>
+
+<h2 id="parametric-learning-algorithm">参数学习（parametric learning algorithm）</h2>
+<p>参数学习是一类有固定数目的参数可以用来进行数据拟合的算法，线性回归就是一种参数学习方法，其中的$\Theta$就是用来进行拟合的参数。</p>
+
+<h2 id="non-parametric-learning-algorithm">非参数学习（non-parametric learning algorithm）</h2>
+<p>参数的数目随着训练集合大小的增长而增长的一类机器学习算法。</p>
+
+<h1 id="locally-weighted-regression">局部加权回归（Locally weighted regression）</h1>
+<p>局部加权算法的主要思想是通过分段拟合给定的数据点的方法进行对训练数据的拟合。对训练集中每一个
+拟合目标：
+&gt; 拟合出$\Theta$，使得$\sum_{i=1}^mw^{(i)}(y^{(i)}-\Theta^Tx^{(i)})^2$最小，其中$w^{(i)}=e^{(-\frac{(x^{(i)}-x)^2}{2})}$，在这种情况下，如果$x^{(i)}-x$很小时，那么$w^{(i)}$将会接近于$1$，否则$w^{(i)}$接近于$0$。这样，距离$x$点比较近的那些点对拟合结果会有较大的影响，而距离$x$较远的点，其影响被相对的忽略了。上述公式中的$w^{(i)}$只是一种常用的系数，可以由其他方法取代。一个一般化的方法是用$w^{(i)}=e^{(-\frac{(x^{(i)}-x)^2}{2\tau})}$来替换原来的$w$，这里的$\tau$是波长参数，其函数图像大致如下。<img src="/resource/2014-06-05-machinelearning/exp.png" alt="w函数图像" /> 通过调节$\tau$可以来控制权值$w$随距离变化的速率，如果$\tau$比较小，那么$w$的函数图像将会变得很窄，随着$\tau$的增大，函数图像将会变得越来越平坦。</p>
+
+<h1 id="logistic">logistic回归</h1>
+
+<h2 id="section-1">线性回归解决分类问题</h2>
+<p>如果有如下图绿色的点所示数据（x轴代表特征，y轴代表离散的两个类别，红色的直线是对这些数据点进行线性回归所拟合出来的直线）。<img src="/resource/2014-06-05-machinelearning/linefit.png" alt="直线拟合" />，在这种情况下，对于一个新的数据点，只要其线性回归的函数预测结果以0.5为分解就可以很好的区分两类数据。但是，如果数据点的分布如下图所示<img src="/resource/2014-06-05-machinelearning/wrongfit.png" alt="错误的拟合" />，那么0.5就无法作为临界值很好的区分这两类数据了。因此，通常情况下用线性回归来分类是个糟糕的选择。</p>
+
+<h2 id="logistic-1">logistic回归解决分类问题</h2>
+<p>假设分类问题的类别$y\in \{0,1\}$，logistic回归的拟合函数为$h_\Theta(X)=g(\Theta^TX)$,
+其取值范围为<script type="math/tex">h_{\Theta(X)} \in [0,1]</script>。
+其中，<script type="math/tex">g(z)=\frac{1}{1+e^{-z}}</script>(函数图像如下)<img src="/resource/2014-06-05-machinelearning/logsticfunction.png" alt="logstic回归函数图像" />，因此，$h_\Theta(X)=g(\Theta^TX)=\frac{1}{1+e^{-\Theta^TX}}$</p>
+
+<p><strong>对logistic回归求解</strong>
+在logstic函数中，数据被分成两类的概率如下</p>
+
+<p>$\begin{align}&amp;P(y=1|X;\Theta)=h_\Theta(X)\\&amp;P(y=0|X;\Theta)=1-h_\Theta(X)\end{align}$</p>
+
+<p>上述函数可以写成一个公式$P(y|X;\Theta)=h_\Theta(X)^y(1-h_\Theta(X))^{1-y}$，参数$\Theta$的似然性$L(\Theta)$就是在该参数下数据出现的概率，计算公式如下
+<script type="math/tex">L(\Theta)=\prod_{i=1}^mP(y^{(i)}|X^{(i)};\Theta)=\prod_{i=1}^{m}h_\Theta(X^{(i)})^{y^{(i)}}(1-h_\Theta(X^{(i)}))^{1-y^{(i)}}</script></p>
+
+<p>对上述公式取对数</p>
+
+<script type="math/tex; mode=display">l(\Theta)=log(L(\Theta))=\sum_{i=1}^m(y^{(i)}log(h_{\Theta}(X^{(i)}))+(1-y^{(i)})log(1-h_\Theta(X^{(i)})))</script>
+
+<p>根据最大似然估计，现在的目标是求得$\Theta$使得$l(\Theta)$最大。
+这里可以使用类似于梯度下降的梯度上升算法来求$\Theta$，与梯度下降方法不同的是，这里$\Theta$的迭代公式是$\Theta:=\Theta+\alpha\nabla_\Theta{l(\Theta)}$(这个公式与梯度下降的不同之处是中间的+号)，为了导出梯度的上升方向，需要把$l(\Theta)$对每一个$\Theta$分量求偏导。</p>
+
+<p><script type="math/tex">\frac{\partial}{\partial{\Theta_j}}l(\Theta)=\sum_{i=1}^m(y^{(i)}-h_\Theta(X^{(i)}))X_j^{(i)}</script>(这个公式我没有自己推导…)</p>
+
+<p>因此，梯度上升迭代过程如下:</p>
+
+<script type="math/tex; mode=display">\Theta_j:=\Theta_j+\alpha\sum_{i=1}^m(y^{(i)}-h_\Theta(X^{(i)}))X_j^{(i)}</script>
+
+</div>
+    <div class="cc">
+      <a target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">
+        <img title="署名-非商业性使用-相同方式共享 4.0 国际" src="/assets/images/CC.png" alt="License"></img>
+      </a>
+    </div>
+    <div class="row status">
+      <div class="col-md-6">
+        <div class="btn-group">
+          
+          <a class="btn btn-primary btn-sm" href="/2014-05/read_notes.html" title="数学中的数系">&laquo; Prev</a>
+          
+          <a class="btn btn-primary btn-sm" href="/archive.html">Archive</a>
+          
+          <a class="btn btn-primary btn-sm disabled">Next &raquo;</a>
+          
+        </div>
+      </div>
+      <div class="col-md-6 visible-lg visible-md">
+      
+
+      </div>
+    </div>
+    
+<div id="comments">
+  <div class="ds-thread" data-thread-key="/2014-06/machinelearning"  data-title="局部加权回归和logistic回归 - shengxc's blog"></div>
+</div>
+
+
+  </article>
+
+  <aside class="col-md-3 visible-lg visible-md">
+          <!--      <section>
+        <h4>Categories</h4>
+        <div class="tag_box">
+          <ul>
+          
+          
+
+
+  
+    
+  
+
+ 
+          </ul>
+        </div>
+      </section>
+-->
+
+            <section>
+        <h4>Recently Posts</h4>
+        <ul>
+        
+          <li><a href="/2014-06/machinelearning.html">局部加权回归和logistic回归</a></li>
+        
+          <li><a href="/2014-05/read_notes.html">数学中的数系</a></li>
+        
+          <li><a href="/2014-05/machinelearning.html">监督学习:线性回归</a></li>
+        
+          <li><a href="/2014-05/python0.html">python的闭包和修饰器</a></li>
+        
+          <li><a href="/2014-05/read_notes.html">自然数和数论</a></li>
+        
+          <li><a href="/2014-05/interview_record.html">零星的面试记忆</a></li>
+        
+          <li><a href="/2014-05/hello.html">第一篇博客</a></li>
+        
+        </ul>
+      </section>
+
+
+            
+      <section>
+        <h4>Recently Comments</h4>
+          <ul class="ds-recent-comments" data-num-items="10" data-show-avatars="0" data-show-time="0" data-show-title="0" data-show-admin="0" data-excerpt-length="12"></ul>
+      </section>
+      
+
+
+            
+      <section>
+        <h4>Recently Visitors</h4>
+          <ul class="ds-recent-visitors" data-num-items="12" data-avatar-size="45"></ul>
+      </section>
+      
+
+
+      <!--      
+-->
+
+  </aside>
+
+</div>
+
+
+      </div>
+
+      <footer class="text-left">
+      <p>&copy; 2014 <a href="/" target="_blank"></a>. with Help from <a href="http://jekyllbootstrap.com/" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap</a> and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a></p>
+      </footer>
+    </div> <!-- /container -->
+
+    <script src="http://cdn.bootcss.com/jquery/2.1.0/jquery.min.js"></script>
+    <script src="http://cdn.bootcss.com/twitter-bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <script src="http://cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+
+    <!--BEGIN添加代码美化-->
+    <link href="/assets/google-code-prettify/prettify.css" rel="stylesheet" type="text/css" media="all">
+    <script type="text/javascript" src="/assets/google-code-prettify/prettify.js"></script>
+    <script type="text/javascript">
+      $(function(){
+      $("pre").addClass("prettyprint linenums");
+      prettyPrint();
+      });
+    </script>
+    <!--END添加代码美化-->
+
+    <!--BEGIN 添加MathJax库支持公式显示-->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+      });
+    </script>
+    <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!--END 添加MathJax库支持公式显示-->
+    
+
+    
+
+
+  <!-- duoshuo Begin -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"shengxc"};
+(function() {
+  var ds = document.createElement('script');
+  ds.type = 'text/javascript';ds.async = true;
+  ds.src = 'http://static.duoshuo.com/embed.js';
+  ds.charset = 'UTF-8';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+})();
+</script>
+<!-- duoshuo End -->
+
+
+
+
+
+    
+
+    
+
+  </body>
+</html>
+

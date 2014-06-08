@@ -30,16 +30,17 @@ tags: ["机器学习"]
 如果有如下图绿色的点所示数据（x轴代表特征，y轴代表离散的两个类别，红色的直线是对这些数据点进行线性回归所拟合出来的直线）。![直线拟合][3]，在这种情况下，对于一个新的数据点，只要其线性回归的函数预测结果以0.5为分解就可以很好的区分两类数据。但是，如果数据点的分布如下图所示![错误的拟合][4]，那么0.5就无法作为临界值很好的区分这两类数据了。因此，通常情况下用线性回归来分类是个糟糕的选择。
 
 ##logistic回归解决分类问题##
-假设分类问题的类别$y\in \{0,1\}$，logistic回归的拟合函数为$$h_\Theta(X)=g(\Theta^TX)$$,
+假设分类问题的类别$y\in \\{0,1\\}$，logistic回归的拟合函数为$h\_\Theta(X)=g(\Theta^TX)$,
 其取值范围为$$h_{\Theta(X)} \in [0,1]$$。
 其中，$$g(z)=\frac{1}{1+e^{-z}}$$(函数图像如下)![logstic回归函数图像][5]，因此，$h_\Theta(X)=g(\Theta^TX)=\frac{1}{1+e^{-\Theta^TX}}$
 
 **对logistic回归求解**
-在logstic函数中，数据被分成两类的概率如下![由于'|'符号会被转换成表格，找不到解决方法，迫不得已只能用截图，好难受][6]
+在logstic函数中，数据被分成两类的概率如下
 
-上述函数可以写成一个公式![......][7]，参数$\Theta$的似然性$L(\Theta)$就是在该参数下数据出现的概率，计算公式如下
+$\begin{align}&P(y=1\|X;\Theta)=h\_\Theta(X)\\\\&P(y=0\|X;\Theta)=1-h\_\Theta(X)\end{align}$
 
-![......][8]
+上述函数可以写成一个公式$P(y\|X;\Theta)=h\_\Theta(X)^y(1-h\_\Theta(X))^{1-y}$，参数$\Theta$的似然性$L(\Theta)$就是在该参数下数据出现的概率，计算公式如下
+$$L(\Theta)=\prod_{i=1}^mP(y^{(i)}|X^{(i)};\Theta)=\prod_{i=1}^{m}h_\Theta(X^{(i)})^{y^{(i)}}(1-h_\Theta(X^{(i)}))^{1-y^{(i)}}$$
 
 对上述公式取对数
 
@@ -60,8 +61,5 @@ $$\Theta_j:=\Theta_j+\alpha\sum_{i=1}^m(y^{(i)}-h_\Theta(X^{(i)}))X_j^{(i)}$$
   [3]: /resource/2014-06-05-machinelearning/linefit.png
   [4]: /resource/2014-06-05-machinelearning/wrongfit.png
   [5]: /resource/2014-06-05-machinelearning/logsticfunction.png
-  [6]: /resource/2014-06-05-machinelearning/math1.png
-  [7]: /resource/2014-06-05-machinelearning/math2.png
-  [8]: /resource/2014-06-05-machinelearning/math3.png
 
 {% include JB/setup %}

@@ -1,0 +1,552 @@
+
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8">
+    <title>shengxc's blog</title>
+    
+    <meta name="keywords" content="">
+    <meta name="author" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- HTML5 shim, for IE6-8 support of HTML elements -->
+
+    <link href="http://cdn.bootcss.com/twitter-bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet" media="all">
+    <link href="http://cdn.bootcss.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet" media="all">
+    <link href="/assets/themes/havee/css/style.css?body=1" rel="stylesheet" media="all">
+    <link href="/assets/themes/havee/css/pygments.css" rel="stylesheet" media="all">
+    <link href="http://cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet" media="all">
+    <link href="/assets/themes/havee/css/" rel="stylesheet" media="all">
+
+    <link rel="shortcut icon" href="/favicon.png">
+    <link rel="canonical" href="/">
+    <!-- fav and touch icons -->
+    <!-- Update these with your own images
+    <link rel="shortcut icon" href="images/favicon.png">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+    -->
+
+    <!-- atom & rss feed -->
+    <link href="/atom.xml" type="application/atom+xml" rel="alternate" title="shengxc's blog ATOM Feed">
+    <link href="/rss.xml" type="application/rss+xml" rel="alternate" title="shengxc's blog RSS Feed">
+
+  </head>
+
+  <body>
+    <!--[if lte IE 9]>
+    <div class="alert alert-warning">
+      <p>Your Internet Explorer is not supported. Please upgrade your Internet Explorer to version 9+, or use latest <a href="http://www.google.com/chrome/" target="_blank" class="alert-link">Google chrome</a>、<a href="http://www.mozilla.org/firefox/" target="_blank" class="alert-link">Mozilla Firefox</a>.</p>
+      <p>If you are using IE 9 or later, make sure you <a href="http://windows.microsoft.com/en-us/internet-explorer/use-compatibility-view#ie=ie-8" target="_blank" class="alert-link">turn off "Compatibility view"</a>.</p>
+    </div>
+    <![endif]-->
+
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/" title="shengxc's blog">shengxc's blog</a>
+      </div>
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse navbar-ex1-collapse">
+        <ul class="nav navbar-nav">
+          
+          
+          
+
+
+  
+    
+  
+    
+      
+      	
+      	<li><a href="/archive.html">Archive</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/categories.html">Categories</a></li>
+      	
+      
+    
+  
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/tags.html">Tags</a></li>
+      	
+      
+    
+  
+    
+  
+
+
+
+
+          <li>
+          <form id="search-form" class="form-inline visible-lg" role="form">
+            <input type="text" class="form-control input-sm" placeholder="Search" id="query">
+          </form>
+          </li>
+        </ul>
+
+        <ul class="nav navbar-nav navbar-right visible-lg visible-md">
+          <li><a href="/rss.xml" target="_blank" title="RSS"><span class="fa fa-rss fa-lg"></span></a></li>
+          
+          
+          
+          
+          
+        </ul>
+      </div><!-- /.navbar-collapse -->
+    </div>
+    </nav>
+
+    <div class="container">
+      <div class="content">
+        
+        <div class="row">
+
+          <article class="col-md-9 main-contenter">
+            <div id="search-loader" style="display:none;text-align:center">
+              <img src="/assets/themes/havee/images/loading.gif">
+            </div>
+            <div class="page-header-wrapper">
+              <div class="page-header">
+                <h2>  <small>西加加大法好！</small></h2>
+              </div>
+            </div>
+            
+
+
+<div class="wrapper">
+  <h2 class="h2 entry-title"><a href="/2014-06/machinelearning.html">局部加权回归和logistic回归</a></h2>
+  
+  欠拟合（underfitting）和过拟合（overfitting）
+假设下图中的离散点为某地区房子大小（横轴）与房子价格（纵轴）之间的关系。
+
+左图中的直线是对数据进行线性回归的结果，中间的图是把直线换成二次曲线所得的结果，而右边的是用5次曲线来拟合得到的完美通过每个坐标点的曲线（由于一共只有6个数据点，因此，5次曲线能够完美通过所有数据点）。左图拟合结果（欠拟合）中的直线无法很好的拟合给定的数据，数据中暗含的某些二次特征，而右图结果（过拟合）仅仅反映了数据本身的特性，而不是隐藏在数据之下的一般变化规律。中间图的拟合结果应该算是这三个中最好的一个。
+
+参数学习和非参数学习
+
+参数学习（parametric learning algorithm）
+参数学习是一类有固定数目的参数可以用来进行数据拟合的算法，线性回归就是一种参数学习方法，其中的$\Theta$就是用来进行拟合的参数。
+
+非参数学习（non-parametric learning algorithm）
+参数的数目随着训练集合大小的增长而增长的一类机器学习算法。
+
+局部加权回归（Locally weighted regression）
+局部加权算法的主要思想是通过分段拟合给定的数据点的方法进行对训练数据的拟合。对训练集中每一个
+拟合目标：
+&gt; 拟合出$\Theta$，使得$\sum_{i=1}^mw^{(i)}(y^{(i)}-\Theta^Tx^{(i)})^2$最小，其中$w^{(i)}=e^{(-\frac{(x^{(i)}-x)^2}{2})}$，在这种情况下，如果$x^{(i)}-x$很小时，那么$w^{(i)}$将会接近于$1$，否则$w^{(i)}$接近于$0$。这样，距离$x$点比较近的那些点对拟合结果会有较大的影响，而距离$x$较远的点，其影响被相对的忽略了。上述公式中的$w^{(i)}$只是一种常用的系数，可以由其他方法取代。一个一般化的方法是用$w^{(i)}=e^{(-\frac{(x^{(i)}-x)^2}{2\tau})}$来替换原来的$w$，这里的$\tau$是波长参数，其函数图像大致如下。 通过调节$\tau$可以来控制权值$w$随距离变化的速率，如果$\tau$比较小，那么$w$的函数图像将会变得很窄，随着$\tau$的增大，函数图像将会变得越来越平坦。
+
+logistic回归
+
+线性回归解决分类问题
+如果有如下图绿色的点所示数据（x轴代表特征，y轴代表离散的两个类别，红色的直线是对这些数据点进行线性回归所拟合出来的直线）。，在这种情况下，对于一个新的数据点，只要其线性回归的函数预测结果以0.5为分解就可以很好的区分两类数据。但是，如果数据点的分布如下图所示，那么0.5就无法作为临界值很好的区分这两类数据了。因此，通常情况下用线性回归来分类是个糟糕的选择。
+
+logistic回归解决分类问题
+假设分类问题的类别$y\in \{0,1\}$，logistic回归的拟合函数为$h_\Theta(X)=g(\Theta^TX)$,
+其取值范围为。
+其中，(函数图像如下)，因此，$h_\Theta(X)=g(\Theta^TX)=\frac{1}{1+e^{-\Theta^TX}}$
+
+对logistic回归求解
+在logstic函数中，数据被分成两类的概率如下
+
+$\begin{align}&amp;P(y=1|X;\Theta)=h_\Theta(X)\\&amp;P(y=0|X;\Theta)=1-h_\Theta(X)\end{align}$
+
+上述函数可以写成一个公式$P(y|X;\Theta)=h_\Theta(X)^y(1-h_\Theta(X))^{1-y}$，参数$\Theta$的似然性$L(\Theta)$就是在该参数下数据出现的概率，计算公式如下
+
+
+对上述公式取对数
+
+
+
+根据最大似然估计，现在的目标是求得$\Theta$使得$l(\Theta)$最大。
+这里可以使用类似于梯度下降的梯度上升算法来求$\Theta$，与梯度下降方法不同的是，这里$\Theta$的迭代公式是$\Theta:=\Theta+\alpha\nabla_\Theta{l(\Theta)}$(这个公式与梯度下降的不同之处是中间的+号)，为了导出梯度的上升方向，需要把$l(\Theta)$对每一个$\Theta$分量求偏导。
+
+(这个公式我没有自己推导…)
+
+因此，梯度上升迭代过程如下:
+
+
+
+
+  
+
+  <div class="status">
+    <div class="col-md-10 meta visible-lg visible-md">
+      <span class="glyphicon glyphicon-calendar"></span><p>05 Jun 2014</p>
+      <span class="glyphicon glyphicon-tags"></span> <a href="/tags.html#机器学习-ref" title="机器学习"><p>机器学习</p></a>
+      <span class="glyphicon glyphicon-comment"></span><a href="/2014-06/machinelearning.html#comments"><p>Comments<span class="ds-thread-count" data-thread-key="/2014-06/machinelearning" data-count-type="comments"></span></p></a>
+    </div>
+    
+    <div class="clearfix"></div>
+  </div>
+</div>
+
+<div class="wrapper">
+  <h2 class="h2 entry-title"><a href="/2014-05/read_notes.html">数学中的数系</a></h2>
+  
+  
+  $\sqrt{2}$是无理数的证明
+
+
+
+  如果$\sqrt{2}$是有理数，则$\sqrt{2}=p/q$（取$p,q$互质，则等号右边的分数不可化简），由此可以推出$p^2=2q^2$。由$p^2=2q^2$可知$p^2$是偶数，故$p$是偶数，假设$p=2r$,可得$(2r)^2=4r^2=2q^2$可以化简，得出矛盾，因此$\sqrt{2}$是无理数
+
+
+
+  所有无限循环小数都是有理数
+
+
+
+  无限循环小数$p=0.a_1a_2…a_mb_1b_2…b_nb_1b_2…b_n…$。令$B=0.b_1b_2…b_n$,则$p=0.a_1a_2…a_m+10^{-m}B(1+10^{-n}+10^{-2n}+10^{-3n}+…)=0.a_1a_2…a_m+B\frac{10^{-m}}{1-10^{-n}}$
+
+
+无限的数学分析
+
+定义
+
+
+  等势
+
+
+如果两个集合A,B可以按如下方式彼此配对，使得A的每一个元素在B中有且仅有一个对应的元素，而B中每个元素在A中有且仅有一个对应元素，那么这个对应称为一一对应，而且，称A,B等势。对有限集来说，等势意味着集合中所含元素个数相等
+
+
+  可数性
+
+
+和自然数集的某个子集等势的集合称为可数集合，其他集合称为不可数集，可数集的元素，正如其名，是“可以计数”的：尽管计数可能永远无法终止，集合中每一个特定的元素都将对应一个自然数。
+
+
+  基数
+
+
+如果两个集合$A,B$是等势的，我们就认为他们有相同的基数，如果集$A$和集$B$的某个子集等势，而集$B$不等势于集$A$或它的任意子集等集$B$有一个比集$A$更大的基数
+
+定理
+
+  正有理数集是可数的
+
+
+
+  每一个正有理数都可以表示为$\frac{a}{b}(a,b是整数)$的形式，将这些数排列成一个矩阵，使得$\frac{a}{b}$在第$a$列第$b$行(如左图所示)，并将其按照右图箭头所示方向排列：
+
+最后，在得到的序列中，将所有$a$和$b$有公因子的$\frac{a}{b}$消去，最终得到一个正有理数序列，使得每一个正有理数都恰好出现一次，因此，正有理数集是可数的。
+
+
+
+  全体实数集是不可数的
+
+
+
+  假设实数集可数，那么全体实数可构成一个如下无限十进位小数的排列
+第一个数 $N_1.a_1a_2a_3…,$
+第二个数 $N_2.b_1b_2b_3…,$
+第三个数 $N_1.c_1c_2c_3…,$
+…            …
+现在来构造一个不属于上述排列中的实数，这样便可引出矛盾，假设不成立。选取一个数码$z=0.abcde….$使得${a}\neq{a_1},{b}\neq{b_2},{c}\neq{c_3}…$，同时，$z$的小数部分所有数都不等于0和9(避免$0.999…=1$这种情况)，这样构造出来的$z$不属于上述排列。
+
+
+
+  对任意给定集合$A$，可以构造一个具有更大基数的集合$B$
+
+
+
+  B的构造方法：$B$是由$A$的所有子集组成的集合
+证明：假设$A,B$等势，即有一个从集合$A$的元素$a$到其某一子集$S_a$的对应规则${a}\leftrightarrow{S_a}$,构造$B$的一个元素$T$，它不能和任意$a$相对应，引出矛盾以证明$B$的基数大于$A$。
+定义$T$为$A$的一个子集，它包含所有使$S_a$不包含$a$的那些元素$a$。这个集合跟每一个$S_a$都相差一个元素$a$，因为，如果$S_a$包含$a$，则$T$不包含$a$，反之，$S_a$不包含$a$,则$T$包含$a$，因此$T$不包含在对应${a}\leftrightarrow{S_a}$中。
+
+
+有关无限的悖论
+不包含自身为元素的集合为普通集（如所有整数组成的集合）；而包含自身为元素的集合称为非普通集（如凡是可以用不超过30个字来定义的集合的集合）。对于所有普通集组成的集合C，它本身必须为普通集或非普通集二者之一。如果C是普通集，那么它应该包含自身，这是一个矛盾，因此它只能是非普通集；而非普通集包含自身作为元素，自身是非普通集，与集C的定义矛盾。
+
+复数
+复数$z=x+yi$可以在直角坐标系中用点$z(x,y)$来表示，其模为该点到原点的距离，为$\rho=\sqrt{x^2+y^2}$，辐角为$x$轴正向和$Oz$直线之间的夹角，记为$\phi$。因此，$z$也可以表示为$z=\rho(cos\phi+isin\phi)$
+
+
+  两个复数相乘就是把它们的模相乘，辐角相加
+
+
+
+  证明：$z=\rho(cos\phi+isin\phi)$，$z’=\rho’(cos\phi’+isin\phi’)$。计算$zz’$，利用三角函数关系可证。
+
+
+代数数和超越数
+
+任意一个数$x$，不论是实数还是复数，如果满足某个形如$a_nx^n+a_{n-1}x^{n-1}+…+a_1x+a_0=0(n\ge1,a_n\neq0)(1)$的代数方程，其中$a_i$是整数，那么这个数就是一个代数数。当$n=1$时，上述方程的根就是有理数。
+
+
+  全体代数数是可数的，而实数是不可数的，因此，必定存在不是代数数的实数，这样的数称为超越数
+
+
+
+  代数数的可数枚举方式：
+对于形如(1)的方程，定义正整数$h=|a_n|+|a_{n-1}|+…+|a_0|+n$为它的高，对于每一个固定的高$h$，只有有限个形如(1)的方程，而每一个这样的方程至多有$n$个不同的根，因此，高为$h$的方程只能有有限个代数数。这样，就可以从高为1开始递增排列方程(1)的根，形成一个代数数的排列。
+
+
+
+  
+
+  <div class="status">
+    <div class="col-md-10 meta visible-lg visible-md">
+      <span class="glyphicon glyphicon-calendar"></span><p>21 May 2014</p>
+      <span class="glyphicon glyphicon-tags"></span> <a href="/tags.html#读书笔记-ref" title="读书笔记"><p>读书笔记</p></a>
+      <span class="glyphicon glyphicon-comment"></span><a href="/2014-05/read_notes.html#comments"><p>Comments<span class="ds-thread-count" data-thread-key="/2014-05/read_notes" data-count-type="comments"></span></p></a>
+    </div>
+    
+    <div class="clearfix"></div>
+  </div>
+</div>
+
+<div class="wrapper">
+  <h2 class="h2 entry-title"><a href="/2014-05/machinelearning.html">监督学习:线性回归</a></h2>
+  
+  线性回归（Linear Regression） 符号说明 $X^{(i)}$:features $y^{(i)}$:target $(X^{(i)},y^{(i)})$:$i^{th}$training example $m$:the number of training examples $n$:the size of feature $\Theta$：parameter vector 回归模型 线性回归模型为 令$x_0=1$,则特征向量$X=[x_0,x_1,…,x_n]^T$,模型可表示为 机器学习算法的目的是学出上述$\Theta$向量，这样，便可对任意输入$X$向量得到上述$h_{\Theta}(x)$作为预测输出。 目标函数 cost function为由此，机器学习算法的目标可描述如下 解法 梯度下降 批量梯度下降(Batch gradient descent) 基本思想 从某一特定$\Theta$开始，不断改变$\Theta$的取值来降低$J(\Theta)$直到收敛。此算法会收敛到local minimum，不同的初始$\Theta$也有可能收敛到不通的local minimum。（如果是线性回归，$J(\theta)$只有一个最小值） 算法流程 任意给定一个初始$\Theta$值 对于$\Theta$中所有分量，更新$\Theta_i := \Theta_i-\alpha\frac{\partial}{\partial\Theta_i}J(\Theta)$(此步即梯度下降，$\alpha$是步长) 当cost function的变化小于某个给定阈值的时候算法停止 公式推导 将此公式带入算法流程中的第二步既得完整的算法。 随机梯度下降(Stochastic gradient descent) 在批量梯度下降算法中，每次迭代都要遍历所有训练样本，当训练样本很多(m很大)时，算法的运行效率会变得很低。随机梯度下降算法会有比批量梯度下降算法快的多的下降速度。 算法流程 任意给定一个初始$\Theta$值 更新$\Theta_i$...
+  
+
+  <div class="status">
+    <div class="col-md-10 meta visible-lg visible-md">
+      <span class="glyphicon glyphicon-calendar"></span><p>21 May 2014</p>
+      <span class="glyphicon glyphicon-tags"></span> <a href="/tags.html#机器学习-ref" title="机器学习"><p>机器学习</p></a>
+      <span class="glyphicon glyphicon-comment"></span><a href="/2014-05/machinelearning.html#comments"><p>Comments<span class="ds-thread-count" data-thread-key="/2014-05/machinelearning" data-count-type="comments"></span></p></a>
+    </div>
+    
+    <div class="clearfix"></div>
+  </div>
+</div>
+
+<div class="wrapper">
+  <h2 class="h2 entry-title"><a href="/2014-05/python0.html">python的闭包和修饰器</a></h2>
+  
+  闭包 闭包 （Closure）是引用了自由变量的函数体，该被引用的自由变量将与函数一同存在，即使离开了创造它的环境也不例外。以下代码是一个简单的闭包例子： #-*-coding:utf-8-*- def start(x): def increment(y): return x + y return increment f = start(0) #初始化基数为0的increment函数 print f(1) print f.__closure__ #一个cell的tuple，每个cell存储闭包所引用的变量 print [cell.cell_contents for cell in f.__closure__] #output 1 (&lt;cell at 0x7f068d751398: int object at 0x1ff5170&gt;,) [0] # 装饰器（Decorators） ## 函数装饰器 不带参数的装饰器 python中的函数装饰器是指某些函数以函数作为输入参数，返回被装饰过的函数的形式。下面是一个为函数运行计时的装饰器，该装饰器输出它装饰的函数的开始时间，终止时间以及运行时间。是一个不带输入参数的函数装饰器 #-*-coding:utf-8-*- import time def timing(func):...
+  
+
+  <div class="status">
+    <div class="col-md-10 meta visible-lg visible-md">
+      <span class="glyphicon glyphicon-calendar"></span><p>07 May 2014</p>
+      <span class="glyphicon glyphicon-tags"></span> <a href="/tags.html#python-ref" title="python"><p>python</p></a>
+      <span class="glyphicon glyphicon-comment"></span><a href="/2014-05/python0.html#comments"><p>Comments<span class="ds-thread-count" data-thread-key="/2014-05/python0" data-count-type="comments"></span></p></a>
+    </div>
+    
+    <div class="clearfix"></div>
+  </div>
+</div>
+
+<div class="wrapper">
+  <h2 class="h2 entry-title"><a href="/2014-05/read_notes.html">自然数和数论</a></h2>
+  
+  
+  
+    关于素数有无穷多个的证明
+ &gt; 假设素数有$n$个，则所有素数可以用$p_1,p_2,…,p_n$表示，构造$A=p_1p_2p_3…p_n+1$,$A$比这些$p$中的任何一个数都大，因而，必须是合数。同时用$p_1,p_2,…,p_n$去除A所得的余数都是$1$，因此，这些$p$都不是$A$的因子，这与$A$是合数这个结论矛盾，因此，假设不成立，命题得证。
+  
+  
+    Eratosthems筛法求自然数$N$之前的素数表
+ &gt; 按大小顺序列出从2到$N$的自然数，然后从2开始，删除2的倍数，然后再删除剩下的第一个数的倍数…一直进行到$\sqrt{N}$，所有剩下的数就是$N$之前的素数。
+  
+  
+    能被整数$11$整除的整数的性质
+ &gt; 由于$10=-1+11$,所以$10\equiv-1(mod\  11)$，由同余的乘积性质，可以得到以下一系列同余式：
+ &gt;&lt;table&gt;&lt;tr&gt;&lt;td&gt;$10^2\equiv(-1)(-1) = 1 (mod\ 11)$&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;$10^3\equiv-1(mod\ 11)$&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;$…$&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+ &gt; 任何一个整数$z$可以表示为$z=a_0+a_1\star10+a_2\star10^2+…+a_n\star10^n$，构造$t=a_0-a_1+a_2-a_3+…$，因为对于$z-t=a_1\star11+a_2\star(10^2-1)+a_3\star(10^3+1)+…$中，所有的加数中的第二项和$0$都是模$11$同余的，因此，$z$和$t$模$11$同余，由此可知：一个数能被11整除当且仅当它的数码交替变号之和能被11整除
+ &gt; 类似的，可以证明一个能被$3$或$9$整除的数，必须而且只须它的数码之和也同样相应地被$3$或$9$整除。
+  
+  
+    费马定理:如果$p$是任意一个不能整除整数$a$的素数，则$a^{p-1}\equiv1(mod\ p)$
+ &gt; 证：考虑$a$的倍数：$m_1=a,m_2=2a,…,m{p-1}=(p-1)a$,可以证明*这些m中的任意两个都不能模p同余且都不能整除p*，因此，这些$m$总有一个排列$m_1’,m_2’,…,m{p-1}’$使得它们相应地同余于$1,2,3,..,p-1$，即$m_1m_2…m_{p-1}=1\star2\star3…(p-1)a^{p-1}\equiv1\star2\star3…(p-1)(mod\ p)$。记$K=1\star2\star3\star…\star(p-1)$，则上式等价于$K(a^{p-1})\equiv K(mod\ p)$因此$K(a^{p-1}-1)\equiv0(mod\ p)$,而$K$的所有因子都无法整除$p$，所以$a^{p-1}-1\equiv0(mod\ p)$，这就是费马定理。
+ &gt; 上述斜体字部分的证明如下：若由于$a$不能整除$p$，所以，所有的$m$都不能整除$p$。同时如果这些$m$中有两个模$p$同余，那么必然存在某一对整数$r$,$s$，满足$1\leq r &lt; s\leq(p-1)$,使得$p$成为$(s-r)a$的一个因子，然而$s-r &lt; p$，不能整除$p$，而$a$也不能整除$p$,因此$(s-r)a$不能整除$p$，得出矛盾，命题得证。
+  
+  
+    欧几里德辗转相除法求两个整数的最大公因数
+ &gt; 假设整数$a,b(a&gt;b)$的最大公因数用$(a,b)$表示，$a/b$的商为$q$,余数为$r$。
+ &gt; 对于任意同时整除$a,b$的整数$u$，有$a=su,b=tu$，它也整除$r$,因为$r=a-bq=su-tuq=(s-qt)u$同理可知，任意整除$b,r$的整数同时也整除$a$，因此$(a,b)=(b,r)$
+  
+
+
+
+  
+
+  <div class="status">
+    <div class="col-md-10 meta visible-lg visible-md">
+      <span class="glyphicon glyphicon-calendar"></span><p>05 May 2014</p>
+      <span class="glyphicon glyphicon-tags"></span> <a href="/tags.html#读书笔记-ref" title="读书笔记"><p>读书笔记</p></a>
+      <span class="glyphicon glyphicon-comment"></span><a href="/2014-05/read_notes.html#comments"><p>Comments<span class="ds-thread-count" data-thread-key="/2014-05/read_notes" data-count-type="comments"></span></p></a>
+    </div>
+    
+    <div class="clearfix"></div>
+  </div>
+</div>
+
+
+<!-- Pagination links -->
+<div class="pull-right">
+  
+    <span><a class="btn btn-primary btn-sm disabled" href="/">Home</a></span>
+    <span><a class="btn btn-primary btn-sm disabled">&laquo; Prev</a></span>
+  
+  <span><a class="btn btn-primary btn-sm disabled">Page: 1 of 2</a></span>
+  
+    <a class="btn btn-primary btn-sm" href="/page2/">Next &raquo;</a>
+    <a class="btn btn-primary btn-sm" href="/page2/">Last</a>
+  
+</div>
+
+          </article>
+
+          <aside class="col-md-3 visible-lg visible-md">
+                  <!--      <section>
+        <h4>Categories</h4>
+        <div class="tag_box">
+          <ul>
+          
+          
+
+
+  
+    
+  
+
+ 
+          </ul>
+        </div>
+      </section>
+-->
+
+            <section>
+        <h4>Recently Posts</h4>
+        <ul>
+        
+          <li><a href="/2014-06/machinelearning.html">局部加权回归和logistic回归</a></li>
+        
+          <li><a href="/2014-05/read_notes.html">数学中的数系</a></li>
+        
+          <li><a href="/2014-05/machinelearning.html">监督学习:线性回归</a></li>
+        
+          <li><a href="/2014-05/python0.html">python的闭包和修饰器</a></li>
+        
+          <li><a href="/2014-05/read_notes.html">自然数和数论</a></li>
+        
+          <li><a href="/2014-05/interview_record.html">零星的面试记忆</a></li>
+        
+          <li><a href="/2014-05/hello.html">第一篇博客</a></li>
+        
+        </ul>
+      </section>
+
+
+            
+      <section>
+        <h4>Recently Comments</h4>
+          <ul class="ds-recent-comments" data-num-items="10" data-show-avatars="0" data-show-time="0" data-show-title="0" data-show-admin="0" data-excerpt-length="12"></ul>
+      </section>
+      
+
+
+            
+      <section>
+        <h4>Recently Visitors</h4>
+          <ul class="ds-recent-visitors" data-num-items="12" data-avatar-size="45"></ul>
+      </section>
+      
+
+
+      <!--      
+-->
+
+          </aside>
+
+        </div>
+
+
+      </div>
+
+      <footer class="text-left">
+      <p>&copy; 2014 <a href="/" target="_blank"></a>. with Help from <a href="http://jekyllbootstrap.com/" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap</a> and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a></p>
+      </footer>
+    </div> <!-- /container -->
+
+    <script src="http://cdn.bootcss.com/jquery/2.1.0/jquery.min.js"></script>
+    <script src="http://cdn.bootcss.com/twitter-bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <script src="http://cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+
+    <!--BEGIN添加代码美化-->
+    <link href="/assets/google-code-prettify/prettify.css" rel="stylesheet" type="text/css" media="all">
+    <script type="text/javascript" src="/assets/google-code-prettify/prettify.js"></script>
+    <script type="text/javascript">
+      $(function(){
+      $("pre").addClass("prettyprint linenums");
+      prettyPrint();
+      });
+    </script>
+    <!--END添加代码美化-->
+
+    <!--BEGIN 添加MathJax库支持公式显示-->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+      });
+    </script>
+    <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!--END 添加MathJax库支持公式显示-->
+    
+
+    
+
+
+  <!-- duoshuo Begin -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"shengxc"};
+(function() {
+  var ds = document.createElement('script');
+  ds.type = 'text/javascript';ds.async = true;
+  ds.src = 'http://static.duoshuo.com/embed.js';
+  ds.charset = 'UTF-8';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+})();
+</script>
+<!-- duoshuo End -->
+
+
+
+
+
+    
+
+    
+
+  </body>
+</html>
+

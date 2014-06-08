@@ -25,7 +25,8 @@ tags: [面试]
     >对于`f(1,k)`来说：显然`f(1,0)=2`；`f(1,1)=1`；`f(1,k)=0 if k>1`。  
     >`n`维空间立方体中的`k`维元素可以看作是由`n-1`维空间立方体中固有的`k-1`维元素移动产生，因此，`f(n,k)=f(n-1,k-1)+2f(n-1,k)`。  
     >下表是上述分析的示意图，表中数字是初始化状态，空格中的数字可由已有元素通过上述函数得到
-    ><table width = "100%" border="1"><tr><td><font color="red">n\k</font></td><td><font color="red">0</font></td><td><font color="red">1</font></td><td><font color="red">2</font></td><td><font color="red">3</font></td><td><font color="red">...</font></td></tr><tr><td><font color="red">1</font></td><td>2^1</td><td>1</td><td>0</td><td>0</td><td>0</td></tr><tr><td><font color="red">2</font></td><td>2^2</td><td></td><td></td><td></td><td></td></tr><tr><td><font color="red">3</font></td><td>2^3</td><td></td><td></td><td></td><td></td></tr><tr><td><font color="red">...</font></td><td>2^n</td><td></td><td></td><td></td><td></td></tr></table>
+    >
+    ><table width = "100%" border="1"><tr><td><font color="red">n\k</font></td><td><font color="red">0</font></td><td><font color="red">1</font></td><td><font color="red">2</font></td><td><font color="red">3</font></td><td><font color="red">...</font></td></tr><tr><td><font color="red">1</font></td><td>2^1</td><td>1</td><td>0</td><td>0</td><td>...</td></tr><tr><td><font color="red">2</font></td><td>2^2</td><td></td><td></td><td></td><td></td></tr><tr><td><font color="red">...</font></td><td>...</td><td></td><td></td><td></td><td></td></tr><tr><td><font color="red">n</font></td><td>2^n</td><td></td><td></td><td></td><td></td></tr></table>
 
 
 {% include JB/setup %}

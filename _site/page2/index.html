@@ -1,0 +1,374 @@
+
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8">
+    <title>shengxc's blog</title>
+    
+    <meta name="keywords" content="">
+    <meta name="author" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- HTML5 shim, for IE6-8 support of HTML elements -->
+
+    <link href="http://cdn.bootcss.com/twitter-bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet" media="all">
+    <link href="http://cdn.bootcss.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet" media="all">
+    <link href="/assets/themes/havee/css/style.css?body=1" rel="stylesheet" media="all">
+    <link href="/assets/themes/havee/css/pygments.css" rel="stylesheet" media="all">
+    <link href="http://cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet" media="all">
+    <link href="/assets/themes/havee/css/" rel="stylesheet" media="all">
+
+    <link rel="shortcut icon" href="/favicon.png">
+    <link rel="canonical" href="/page2/">
+    <!-- fav and touch icons -->
+    <!-- Update these with your own images
+    <link rel="shortcut icon" href="images/favicon.png">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+    -->
+
+    <!-- atom & rss feed -->
+    <link href="/atom.xml" type="application/atom+xml" rel="alternate" title="shengxc's blog ATOM Feed">
+    <link href="/rss.xml" type="application/rss+xml" rel="alternate" title="shengxc's blog RSS Feed">
+
+  </head>
+
+  <body>
+    <!--[if lte IE 9]>
+    <div class="alert alert-warning">
+      <p>Your Internet Explorer is not supported. Please upgrade your Internet Explorer to version 9+, or use latest <a href="http://www.google.com/chrome/" target="_blank" class="alert-link">Google chrome</a>、<a href="http://www.mozilla.org/firefox/" target="_blank" class="alert-link">Mozilla Firefox</a>.</p>
+      <p>If you are using IE 9 or later, make sure you <a href="http://windows.microsoft.com/en-us/internet-explorer/use-compatibility-view#ie=ie-8" target="_blank" class="alert-link">turn off "Compatibility view"</a>.</p>
+    </div>
+    <![endif]-->
+
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/" title="shengxc's blog">shengxc's blog</a>
+      </div>
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse navbar-ex1-collapse">
+        <ul class="nav navbar-nav">
+          
+          
+          
+
+
+  
+    
+  
+    
+      
+      	
+      	<li><a href="/archive.html">Archive</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/categories.html">Categories</a></li>
+      	
+      
+    
+  
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/tags.html">Tags</a></li>
+      	
+      
+    
+  
+    
+  
+
+
+
+
+          <li>
+          <form id="search-form" class="form-inline visible-lg" role="form">
+            <input type="text" class="form-control input-sm" placeholder="Search" id="query">
+          </form>
+          </li>
+        </ul>
+
+        <ul class="nav navbar-nav navbar-right visible-lg visible-md">
+          <li><a href="/rss.xml" target="_blank" title="RSS"><span class="fa fa-rss fa-lg"></span></a></li>
+          
+          
+          
+          
+          
+        </ul>
+      </div><!-- /.navbar-collapse -->
+    </div>
+    </nav>
+
+    <div class="container">
+      <div class="content">
+        
+        <div class="row">
+
+          <article class="col-md-9 main-contenter">
+            <div id="search-loader" style="display:none;text-align:center">
+              <img src="/assets/themes/havee/images/loading.gif">
+            </div>
+            <div class="page-header-wrapper">
+              <div class="page-header">
+                <h2>  <small>西加加大法好！</small></h2>
+              </div>
+            </div>
+            
+
+
+<div class="wrapper">
+  <h2 class="h2 entry-title"><a href="/2014-05/interview_record.html">零星的面试记忆</a></h2>
+  
+  记录一下最近碰到的一些面试题目
+
+
+  
+    如果有一个很大的文件(比如10G)存放在1台电脑上，现要将其拷贝至10台不同的电脑，应该怎么做？
+
+    
+      最简单的当然是每台电脑依次拷贝，但这肯定不算是一个好方法，然后问了下面试官这些机器之间是否存在网络连接，得到肯定回答，并且每台电脑都相互连接，然后我的回答是将大文件切成很多小块数据，并将这些数据包向与其相连的机器发送，这样，每台机器都能从不同的邻居处获得不同的数据包。然后被追问这样做的时间复杂度是多少，对于这个问题，虽然被提示了很多很多，但我还是没有分析出来，完全不知道如何入手。。。
+    
+  
+  
+    一个有序数组，如果其中某一元素出现的次数超过数组大小的一半，如何快速将其找出来？
+
+    
+      当时看到这个问题第一反应就是我做过，然后将经典的两个不同的数组两两抵消，最终剩下的数组就是结果这个方法告诉了面试官，面试官提示效率不高，让我看清题目条件，仔细一看才发现是有序数组，当时就知道悲剧了，然后只能硬着头皮回答说数组中间那个数就是，追问，如果没有一个数出现次数超过一半怎么办？我给出的解决方案是找到中间那个数后向左右分别二分搜索，查找两个端点，然后相减查看距离是否超过一半。接着又问一定要两边都查找吗？当时一直没想出来，等到面完才想到找了一边之后相另一边走数组长度的一半，看看是否相同的数便可搞定。
+    
+  
+  
+    对于正方形：有4个点（0维元素）；4条边（1维元素）；1个面（2维元素）。
+对于立方体：有8个点（0维元素）；12条边（1维元素）；8个面（2维元素）；1个体（3维元素）
+问：一个4维立方体有几个点，边，面，体和4维空间元素？追问，对于n维空间中立方体（这么叫可能不合适，不过管他呢）的k维元素，其出现次数又是怎么样的？
+
+    
+      当假设n维空间中的立方体中k维元素共有f(n,k)个（n&gt;0且k&gt;=0）:
+对于0维元素（点）来说，很简单，每升一个维度都乘以2，因此f(n,0)=2^n。
+对于f(1,k)来说：显然f(1,0)=2；f(1,1)=1；f(1,k)=0 if k&gt;1。
+n维空间立方体中的k维元素可以看作是由n-1维空间立方体中固有的k-1维元素移动产生，因此，f(n,k)=f(n-1,k-1)+2f(n-1,k)。
+下表是上述分析的示意图，表中数字是初始化状态，空格中的数字可由已有元素通过上述函数得到
+
+      n\k0123...12^1100...22^2......n2^n
+    
+  
+
+
+
+  
+
+  <div class="status">
+    <div class="col-md-10 meta visible-lg visible-md">
+      <span class="glyphicon glyphicon-calendar"></span><p>02 May 2014</p>
+      <span class="glyphicon glyphicon-tags"></span> <a href="/tags.html#面试-ref" title="面试"><p>面试</p></a>
+      <span class="glyphicon glyphicon-comment"></span><a href="/2014-05/interview_record.html#comments"><p>Comments<span class="ds-thread-count" data-thread-key="/2014-05/interview_record" data-count-type="comments"></span></p></a>
+    </div>
+    
+    <div class="clearfix"></div>
+  </div>
+</div>
+
+<div class="wrapper">
+  <h2 class="h2 entry-title"><a href="/2014-05/hello.html">第一篇博客</a></h2>
+  
+  作为一个从小就不会写作文的人，第一篇博客实在是太难写了，不过既然折腾了这么久，就不能放弃最初那个写博客冲动，以后尽量多写博客，记录学习经历。
+
+感谢Havee的jekyll-bootstrap模板
+
+
+作为一个码农
+
+#include &lt;stdio.h&gt;
+int main(int argc,char** argv){
+  printf("Hello world!\n");
+}
+
+
+
+  
+
+  <div class="status">
+    <div class="col-md-10 meta visible-lg visible-md">
+      <span class="glyphicon glyphicon-calendar"></span><p>01 May 2014</p>
+      <span class="glyphicon glyphicon-tags"></span> <a href="/tags.html#各种各样的-ref" title="各种各样的"><p>各种各样的</p></a>
+      <span class="glyphicon glyphicon-comment"></span><a href="/2014-05/hello.html#comments"><p>Comments<span class="ds-thread-count" data-thread-key="/2014-05/hello" data-count-type="comments"></span></p></a>
+    </div>
+    
+    <div class="clearfix"></div>
+  </div>
+</div>
+
+
+<!-- Pagination links -->
+<div class="pull-right">
+  
+    
+      <a class="btn btn-primary btn-sm" href="/">Home</a>
+      <a class="btn btn-primary btn-sm" href="/">&laquo; Prev</a>
+    
+  
+  <span><a class="btn btn-primary btn-sm disabled">Page: 2 of 2</a></span>
+  
+    <span><a class="btn btn-primary btn-sm disabled">Next &raquo;</a></span>
+    <span><a class="btn btn-primary btn-sm disabled">Last</a></span>
+  
+</div>
+
+          </article>
+
+          <aside class="col-md-3 visible-lg visible-md">
+                  <!--      <section>
+        <h4>Categories</h4>
+        <div class="tag_box">
+          <ul>
+          
+          
+
+
+  
+    
+  
+
+ 
+          </ul>
+        </div>
+      </section>
+-->
+
+            <section>
+        <h4>Recently Posts</h4>
+        <ul>
+        
+          <li><a href="/2014-06/machinelearning.html">局部加权回归和logistic回归</a></li>
+        
+          <li><a href="/2014-05/read_notes.html">数学中的数系</a></li>
+        
+          <li><a href="/2014-05/machinelearning.html">监督学习:线性回归</a></li>
+        
+          <li><a href="/2014-05/python0.html">python的闭包和修饰器</a></li>
+        
+          <li><a href="/2014-05/read_notes.html">自然数和数论</a></li>
+        
+          <li><a href="/2014-05/interview_record.html">零星的面试记忆</a></li>
+        
+          <li><a href="/2014-05/hello.html">第一篇博客</a></li>
+        
+        </ul>
+      </section>
+
+
+            
+      <section>
+        <h4>Recently Comments</h4>
+          <ul class="ds-recent-comments" data-num-items="10" data-show-avatars="0" data-show-time="0" data-show-title="0" data-show-admin="0" data-excerpt-length="12"></ul>
+      </section>
+      
+
+
+            
+      <section>
+        <h4>Recently Visitors</h4>
+          <ul class="ds-recent-visitors" data-num-items="12" data-avatar-size="45"></ul>
+      </section>
+      
+
+
+      <!--      
+-->
+
+          </aside>
+
+        </div>
+
+
+      </div>
+
+      <footer class="text-left">
+      <p>&copy; 2014 <a href="/" target="_blank"></a>. with Help from <a href="http://jekyllbootstrap.com/" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap</a> and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a></p>
+      </footer>
+    </div> <!-- /container -->
+
+    <script src="http://cdn.bootcss.com/jquery/2.1.0/jquery.min.js"></script>
+    <script src="http://cdn.bootcss.com/twitter-bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <script src="http://cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+
+    <!--BEGIN添加代码美化-->
+    <link href="/assets/google-code-prettify/prettify.css" rel="stylesheet" type="text/css" media="all">
+    <script type="text/javascript" src="/assets/google-code-prettify/prettify.js"></script>
+    <script type="text/javascript">
+      $(function(){
+      $("pre").addClass("prettyprint linenums");
+      prettyPrint();
+      });
+    </script>
+    <!--END添加代码美化-->
+
+    <!--BEGIN 添加MathJax库支持公式显示-->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+      });
+    </script>
+    <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!--END 添加MathJax库支持公式显示-->
+    
+
+    
+
+
+  <!-- duoshuo Begin -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"shengxc"};
+(function() {
+  var ds = document.createElement('script');
+  ds.type = 'text/javascript';ds.async = true;
+  ds.src = 'http://static.duoshuo.com/embed.js';
+  ds.charset = 'UTF-8';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+})();
+</script>
+<!-- duoshuo End -->
+
+
+
+
+
+    
+
+    
+
+  </body>
+</html>
+
