@@ -33,7 +33,7 @@ tags: ["机器学习"]
 
 **基本思想**
 
-> 从某一特定$\Theta$开始，不断改变$\Theta$的取值来降低$J(\Theta)$直到收敛。此算法会收敛到local minimum，不同的初始$\Theta$也有可能收敛到不通的local minimum。（如果是线性回归，$J(\theta)$只有一个最小值）
+> 从某一特定$\Theta$开始，不断改变$\Theta$的取值来降低$J(\Theta)$直到收敛。此算法会收敛到local minimum，不同的初始$\Theta$也有可能收敛到不同的local minimum。（如果是线性回归，$J(\theta)$只有一个最小值）
 
 **算法流程**
 
