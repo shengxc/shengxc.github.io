@@ -3,7 +3,7 @@ layout: post
 title: "零星的面试记忆"
 description: ""
 category:
-tags: [面试]
+tags: ["面试","算法"]
 ---
 
 记录一下最近碰到的一些面试题目
